@@ -1,9 +1,8 @@
-import axios from 'axios';
 import React,{ useState,useEffect } from 'react';
 import postUserData from '../api/loginApi';
 import { useSelector,useDispatch } from 'react-redux';
-import { setUser } from '../redux/feature/loginData';
-import { Link } from 'react-router-dom';
+import { initializeFromLocalStorage, setUser } from '../redux/feature/loginData';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -11,6 +10,13 @@ const LoginForm=()=> {
   const user = useSelector((state) => state.user);
   const dispatch= useDispatch()
   const navigate = useNavigate();
+  let location = useLocation();
+
+// for checking weather user information is already present in local storage   
+  useEffect(() => {
+    dispatch(initializeFromLocalStorage());
+  }, [dispatch]);
+
 
 
     const [data, setdata] = useState({
@@ -18,7 +24,6 @@ const LoginForm=()=> {
       password: '',
      
     });
-    console.log(user)
     
   // For handling change in inputs 
   const handleInputChange = (e) => {
@@ -53,9 +58,12 @@ const LoginForm=()=> {
   };
   
 
+  if (user.usertoken) {
+    return <Navigate to="/dashboard" state={{ from: location }} replace />;
+  }
+  
   return (
   <>
-
   
   
 <form className='loginForm' onSubmit={handleSubmit}>

@@ -7,13 +7,14 @@ const PrivateRoute = () => {
   let location = useLocation();
 
 
+  
   if (!user.usertoken) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-  else{
+  
 
     return <Dashboard/>;
-  }
+  
 
 };
 
