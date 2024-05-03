@@ -12,8 +12,8 @@ function App() {
       <Route path='/login' element={<Loginpage/>}/>
       <Route path="/" element={<PrivateRoutes/>}>
       <Route path='/dashboard' element={<Dashboard/>}/>
-      <Route path="*" element={<h1> Route Not found</h1>}/>
           </Route>
+      <Route path="*" element={<h1> Route Not found</h1>}/>
 
 
     </Routes>
