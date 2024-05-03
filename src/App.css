@@ -1,0 +1,12 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.loginForm{
+  display: flex;
+  min-height: 500px;
+  justify-content: center;
+  align-items: center;
+}
