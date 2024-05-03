@@ -6,11 +6,15 @@ const PrivateRoute = () => {
   const user = useSelector((state) => state.user);
   let location = useLocation();
 
-  if (!user.user) {
+
+  if (!user.usertoken) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
+  else{
 
-  return <Dashboard/>;
+    return <Dashboard/>;
+  }
+
 };
 
 export default PrivateRoute;

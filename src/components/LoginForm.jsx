@@ -4,16 +4,21 @@ import postUserData from '../api/loginApi';
 import { useSelector,useDispatch } from 'react-redux';
 import { setUser } from '../redux/feature/loginData';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 const LoginForm=()=> {
   const user = useSelector((state) => state.user);
   const dispatch= useDispatch()
+  const navigate = useNavigate();
+
 
     const [data, setdata] = useState({
       email: '',
       password: '',
      
     });
+    console.log(user)
     
   // For handling change in inputs 
   const handleInputChange = (e) => {
@@ -33,9 +38,10 @@ const LoginForm=()=> {
         if (responseData.status === "fail") {
           alert("An error occurred while submitting data");
         } else {
-          dispatch(setUser(responseData.token));
+          dispatch(setUser(responseData));
           alert("Your data has been submitted successfully");
-          console.log(responseData.token); 
+          navigate('/dashboard', { replace: true });
+
         }
       } else {
         alert("Failed to submit data");
