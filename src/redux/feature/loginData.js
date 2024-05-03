@@ -10,22 +10,24 @@ const initialState = {
   
 };
 
+
 export const usernameData = createSlice({
   name: 'user',
   initialState,
   reducers: {
     setUser: (state, action) => {
     
-        state.user = action.payload
-        state.usertoken = state.user.token
+        state.user = action.payload?.data
+        state.usertoken = action.payload?.token
+
         state.auth=true
         localStorage.setItem('userData', JSON.stringify(state.user));
         
-  // Set the data in a cookie
+  // Set the data in a cookie in seconds 0.00007
   // document.cookie = `useData=${JSON.stringify(state.usertoken)}; expires=${new Date(Date.now() + 3600000).toUTCString()}; path=/`;
 
-
-    Cookies.set('userData', JSON.stringify(state.usertoken), { expires: 7 }, {path:"/"});
+  
+  Cookies.set('userData', JSON.stringify(state.usertoken), { expires: 7 }, {path:"/"});
       
      
     },
@@ -40,9 +42,11 @@ export const usernameData = createSlice({
     },
     initializeFromLocalStorage: (state) => {
       const userData = JSON.parse(localStorage.getItem('userData'));
+const cookieValue = Cookies.get('userData');
+
       if (userData) {
         state.user = userData;
-        state.usertoken = userData.token;
+        state.usertoken = cookieValue
         state.auth = true;
       }
     }

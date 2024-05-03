@@ -27,8 +27,8 @@ const Dashboard = () => {
       <div>
 
       dashboard
-      <h2>Wellcome {user.user?.data?.Email}</h2>
-      <p>your massage is {user.user?.message}</p>
+      <h2>Wellcome {user?.user?.FirstName}</h2>
+      <p>You are LogedIn using this Email: {user?.user?.Email}</p>
 
       <button className='btn-danger p-2' onClick={handleLogout}>
         LogOut
